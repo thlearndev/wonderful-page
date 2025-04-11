@@ -29,27 +29,34 @@ SOFTWARE.
 const promoPopup = document.getElementsByClassName('promo')[0];
 const promoPopupClose = document.getElementsByClassName('promo-close')[0];
 
-if (isMobile()) {
-    setTimeout(() => {
-        promoPopup.style.display = 'table';
-    }, 20000);
+// 永远不显示广告弹窗
+// if (isMobile()) {
+//     setTimeout(() => {
+//         promoPopup.style.display = 'table';
+//     }, 20000);
+// }
+
+if (promoPopupClose) {
+    promoPopupClose.addEventListener('click', e => {
+        promoPopup.style.display = 'none';
+    });
 }
 
-promoPopupClose.addEventListener('click', e => {
-    promoPopup.style.display = 'none';
-});
-
 const appleLink = document.getElementById('apple_link');
-appleLink.addEventListener('click', e => {
-    ga('send', 'event', 'link promo', 'app');
-    window.open('https://apps.apple.com/us/app/fluid-simulation/id1443124993');
-});
+if (appleLink) {
+    appleLink.addEventListener('click', e => {
+        ga('send', 'event', 'link promo', 'app');
+        window.open('https://apps.apple.com/us/app/fluid-simulation/id1443124993');
+    });
+}
 
 const googleLink = document.getElementById('google_link');
-googleLink.addEventListener('click', e => {
-    ga('send', 'event', 'link promo', 'app');
-    window.open('https://play.google.com/store/apps/details?id=games.paveldogreat.fluidsimfree');
-});
+if (googleLink) {
+    googleLink.addEventListener('click', e => {
+        ga('send', 'event', 'link promo', 'app');
+        window.open('https://play.google.com/store/apps/details?id=games.paveldogreat.fluidsimfree');
+    });
+}
 
 // Simulation section
 
@@ -60,9 +67,12 @@ let config = {
     SIM_RESOLUTION: 128,
     DYE_RESOLUTION: 1024,
     CAPTURE_RESOLUTION: 512,
-    DENSITY_DISSIPATION: 1,
-    VELOCITY_DISSIPATION: 0.2,
-    PRESSURE: 0.8,
+    // DENSITY_DISSIPATION: 1,
+    DENSITY_DISSIPATION: 2,
+    // VELOCITY_DISSIPATION: 0.2,
+    VELOCITY_DISSIPATION: 2.5,
+    PRESSURE: 0,
+    // PRESSURE: 0.8,
     PRESSURE_ITERATIONS: 20,
     CURL: 30,
     SPLAT_RADIUS: 0.25,
@@ -79,7 +89,7 @@ let config = {
     BLOOM_INTENSITY: 0.8,
     BLOOM_THRESHOLD: 0.6,
     BLOOM_SOFT_KNEE: 0.7,
-    SUNRAYS: true,
+    SUNRAYS: false,
     SUNRAYS_RESOLUTION: 196,
     SUNRAYS_WEIGHT: 1.0,
 }
@@ -1478,7 +1488,8 @@ canvas.addEventListener('mousedown', e => {
 
 canvas.addEventListener('mousemove', e => {
     let pointer = pointers[0];
-    if (!pointer.down) return;
+    // if (!pointer.down) return;
+    // 移除对pointer.down的检查，这样无需按下鼠标也能产生效果
     let posX = scaleByPixelRatio(e.offsetX);
     let posY = scaleByPixelRatio(e.offsetY);
     updatePointerMoveData(pointer, posX, posY);

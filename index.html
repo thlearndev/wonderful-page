@@ -12,13 +12,13 @@
         <link rel="apple-touch-icon" href="logo.png">
         <link rel="icon" href="logo.png">
 
-        <title>WebGL Fluid Simulation</title>
-        <meta name="description" content="A WebGL fluid simulation that works in mobile browsers.">
+        <title>siyue.org</title>
+        <meta name="description" content="四月黎明 - 人间四月芳菲尽，山寺桃花始盛开。">
 
         <meta property="og:type" content="website">
-        <meta property="og:title" content="Webgl Fluid Simulation">
-        <meta property="og:description" content="A WebGL fluid simulation that works in mobile browsers.">
-        <meta property="og:url" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/">
+        <meta property="og:title" content="四月黎明">
+        <meta property="og:description" content="四月黎明 - 人间四月芳菲尽，山寺桃花始盛开。">
+        <meta property="og:url" content="https://siyue.org/">
         <meta property="og:image" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/logo.png">
 
         <script type="text/javascript" src="dat.gui.min.js"></script>
@@ -100,9 +100,70 @@
                 content: 'd';
             }
 
+            /* 新增的标题和诗句样式 */
+            .title-container {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                z-index: 10;
+                width: 100%;
+                pointer-events: none;
+            }
+
+            .main-title {
+                font-size: 5rem;
+                color: rgba(255, 255, 255, 0.9);
+                margin-bottom: 0.5rem;
+                font-family: "Microsoft YaHei", "微软雅黑", SimHei, "黑体", sans-serif;
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+                letter-spacing: 0.3rem;
+            }
+
+            .subtitle {
+                font-size: 1.5rem;
+                color: rgba(255, 255, 255, 0.8);
+                margin-bottom: 2rem;
+                font-family: "Microsoft YaHei", "微软雅黑", SimHei, "黑体", sans-serif;
+                text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+            }
+
+            .poem {
+                font-size: 1.3rem;
+                color: rgba(255, 255, 255, 0.75);
+                font-family: "Microsoft YaHei", "微软雅黑", SimHei, "黑体", sans-serif;
+                text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+                line-height: 2;
+            }
+
+            .copyright {
+                position: absolute;
+                bottom: 20px;
+                width: 100%;
+                text-align: center;
+                color: rgba(255, 255, 255, 0.5);
+                font-size: 0.8rem;
+                font-family: "Microsoft YaHei", "微软雅黑", SimHei, "黑体", sans-serif;
+                z-index: 10;
+            }
+
+            /* 响应式样式调整 */
+            @media screen and (max-width: 768px) {
+                .main-title {
+                    font-size: 3rem;
+                }
+                .subtitle {
+                    font-size: 1.2rem;
+                }
+                .poem {
+                    font-size: 1rem;
+                }
+            }
+
+            /* 以下是原有代码 */
             .promo {
-                display: none;
-                /* display: table; */
+                display: none !important; /* 强制隐藏广告弹窗 */
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -149,11 +210,9 @@
                 text-align: left;
                 float: left;
                 font-size: 1.3em;
-                /* transition: 0.2s; */
             }
 
             .promo-close:hover {
-                /* transform: scale(1.25); */
                 cursor: pointer;
             }
 
@@ -196,6 +255,14 @@
     </head>
     <body>
         <canvas></canvas>
+
+        <!-- 新增的标题和诗句内容 -->
+        <div class="title-container">
+            <h1 class="main-title">四月黎明</h1>
+            <h2 class="subtitle">siyue.org</h2>
+            <p class="poem">人间四月芳菲尽，山寺桃花始盛开。</p>
+        </div>
+        <div class="copyright">Copyright ©2025 by @默冰</div>
 
         <!-- Mother of God, pls forgive me -->
         <div class="promo">
