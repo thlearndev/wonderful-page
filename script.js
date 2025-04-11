@@ -276,8 +276,14 @@ function startGUI () {
     app.domElement.parentElement.appendChild(appIcon);
     appIcon.className = 'icon app';
 
-    if (isMobile())
-        gui.close();
+    // 无论是否为移动设备，都关闭控制栏
+    gui.close();
+    
+    // 隐藏控制栏 - 添加CSS使其不可见
+    const guiElement = document.querySelector('.dg.ac');
+    if (guiElement) {
+        guiElement.style.display = 'none';
+    }
 }
 
 function isMobile () {
