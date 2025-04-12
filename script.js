@@ -67,29 +67,26 @@ let config = {
     SIM_RESOLUTION: 128,
     DYE_RESOLUTION: 1024,
     CAPTURE_RESOLUTION: 512,
-    // DENSITY_DISSIPATION: 1,
-    DENSITY_DISSIPATION: 1.5,
-    // VELOCITY_DISSIPATION: 0.2,
-    VELOCITY_DISSIPATION: 2,
-    PRESSURE: 0.2,
-    // PRESSURE: 0.8,
+    DENSITY_DISSIPATION: 1.8,  // 增加扩散效果
+    VELOCITY_DISSIPATION: 1.8, // 调整速度扩散，让流动更柔和
+    PRESSURE: 0.4,             // 增加压力值，让流体更活跃
     PRESSURE_ITERATIONS: 20,
-    CURL: 30,
-    SPLAT_RADIUS: 0.25,
+    CURL: 25,                  // 减少旋度，让流体更加柔和
+    SPLAT_RADIUS: 0.3,         // 增大飞溅半径，创造更大范围的色彩
     SPLAT_FORCE: 6000,
     SHADING: true,
     COLORFUL: true,
-    COLOR_UPDATE_SPEED: 10,
+    COLOR_UPDATE_SPEED: 8,     // 减慢颜色变化速度
     PAUSED: false,
-    BACK_COLOR: { r: 0, g: 0, b: 0 },
+    BACK_COLOR: { r: 0, g: 0, b: 0 }, // 保持黑色背景
     TRANSPARENT: false,
     BLOOM: true,
     BLOOM_ITERATIONS: 8,
     BLOOM_RESOLUTION: 256,
-    BLOOM_INTENSITY: 0.8,
-    BLOOM_THRESHOLD: 0.6,
+    BLOOM_INTENSITY: 0.6,      // 减弱辉光强度，不抢文字风头
+    BLOOM_THRESHOLD: 0.5,
     BLOOM_SOFT_KNEE: 0.7,
-    SUNRAYS: false,
+    SUNRAYS: false,            // 不使用阳光射线效果
     SUNRAYS_RESOLUTION: 196,
     SUNRAYS_WEIGHT: 1.0,
 }
@@ -1183,7 +1180,14 @@ function updateKeywords () {
 
 updateKeywords();
 initFramebuffers();
-multipleSplats(parseInt(Math.random() * 20) + 5);
+multipleSplats(parseInt(Math.random() * 5) + 9);
+
+// 每10秒自动添加一些飞溅效果，保持动态感
+setInterval(() => {
+    if (!config.PAUSED) {
+        multipleSplats(parseInt(Math.random() * 3) + 2);
+    }
+}, 10000);
 
 let lastUpdateTime = Date.now();
 let colorUpdateTimer = 0.0;
@@ -1488,7 +1492,6 @@ canvas.addEventListener('mousedown', e => {
 
 canvas.addEventListener('mousemove', e => {
     let pointer = pointers[0];
-    // if (!pointer.down) return;
     // 移除对pointer.down的检查，这样无需按下鼠标也能产生效果
     let posX = scaleByPixelRatio(e.offsetX);
     let posY = scaleByPixelRatio(e.offsetY);
@@ -1580,10 +1583,17 @@ function correctDeltaY (delta) {
 }
 
 function generateColor () {
-    let c = HSVtoRGB(Math.random(), 1.0, 1.0);
-    c.r *= 0.15;
-    c.g *= 0.15;
-    c.b *= 0.15;
+    // 倾向于蓝紫和粉色系，与四月主题相符
+    const hue = Math.random() * 0.4 + 0.5; // 限制在蓝紫到粉色范围 (0.5-0.9)
+    const s = 0.8 + Math.random() * 0.2; // 高饱和度
+    const v = 0.8 + Math.random() * 0.2; // 高亮度
+    let c = HSVtoRGB(hue, s, v);
+    
+    // 调整亮度，使其较为柔和
+    c.r *= 0.2;
+    c.g *= 0.2;
+    c.b *= 0.2;
+    
     return c;
 }
 
