@@ -201,8 +201,14 @@
                 left: 10%;
             }
             
+            /* 添加诗句分行样式 */
+            .poem .first-line,
+            .poem .second-line {
+                display: inline-block;
+            }
+            
             .poem .spring-green {
-                color: #8FFF66; /* 更亮的春天嫩绿色 */
+                color: #82d265; /* 更亮的春天嫩绿色 */
             }
             
             .poem .april-pink {
@@ -227,21 +233,21 @@
 
             .copyright {
                 position: absolute;
-                bottom: 20px;
+                bottom: 15px;
                 width: 100%;
                 text-align: center;
-                color: rgba(255, 255, 255, 0.6);
-                font-size: 0.9rem;
+                color: rgba(255, 255, 255, 0.5);
+                font-size: 0.8rem;
                 font-family: "Noto Serif SC", "Microsoft YaHei", "微软雅黑", SimHei, "黑体", sans-serif;
                 z-index: 10;
-                letter-spacing: 1px;
-                text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+                letter-spacing: 0.7px;
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
                 transition: all 0.5s ease;
             }
             
             .copyright:hover {
-                color: rgba(255, 255, 255, 0.8);
-                text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+                color: rgba(255, 255, 255, 0.7);
+                text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
             }
 
             /* 响应式样式调整 */
@@ -258,7 +264,7 @@
             
             @media screen and (max-width: 480px) {
                 .main-title {
-                    font-size: 2.8rem;
+                    font-size: 3.5rem;
                     letter-spacing: 0.2rem;
                 }
                 .poem {
@@ -369,14 +375,19 @@
         <div class="title-container">
             <h1 class="main-title">四月黎明</h1>
             <p class="poem">
-                <span class="mountain-blue">人间</span>
-                <span class="april-pink">四月</span>
-                <span class="blossom-white">芳菲</span>
-                <span class="petal-pink">尽，</span>
-                <span class="spring-green">山寺</span>
-                <span class="peach-color">桃花</span>
-                <span class="blossom-white">始盛</span>
-                <span class="april-pink">开。</span>
+                <span class="first-line">
+                    <span class="mountain-blue">人间</span>
+                    <span class="april-pink">四月</span>
+                    <span class="blossom-white">芳菲</span>
+                    <span class="petal-pink">尽，</span>
+                </span>
+                <br>
+                <span class="second-line">
+                    <span class="spring-green">山寺</span>
+                    <span class="peach-color">桃花</span>
+                    <span class="blossom-white">始盛</span>
+                    <span class="april-pink">开。</span>
+                </span>
             </p>
         </div>
         <div class="copyright">Copyright ©2025 by @默冰</div>
